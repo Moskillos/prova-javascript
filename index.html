@@ -38,6 +38,7 @@ description:
                 console.log(beerSlice)
 
                 beerSlice.forEach(element => {
+                    const div = document.createElement('div')
                     const h3 = document.createElement('h3');
                     const body = document.querySelector('body');
                     const name = document.createElement('p');
@@ -47,12 +48,12 @@ description:
                     const deleteEl = document.createElement('button');
                     deleteEl.textContent = 'Delete';
 
-                    body.append(h3);
-                    body.append(name);
-                    body.append(date);
-                    body.append(description);
-                    body.append(image);
-                    body.append(deleteEl)
+                    body.append(div);
+                    div.append(name);
+                    div.append(date);
+                    div.append(description);
+                    div.append(image);
+                    div.append(deleteEl)
 
 
                     h3.textContent = element.id;                    
@@ -64,7 +65,8 @@ description:
 
                     deleteEl.addEventListener('click', () => {
                         beerSlice.splice(element.id, 1);
-                        console.log(beerSlice)
+                        div.remove()
+                        
                     })
 
                 });
