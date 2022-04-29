@@ -1,0 +1,77 @@
+<!-- ## Topic?
+After a lot of thinking we realized that it would be great to work with something known by most of us, and the answer was clear: __BEER__.
+Luckily, we _do_ know a public API about this topic, called [PUNK API](https://punkapi.com). The website has the necessary documentation to work with it.
+## App needs
+Using the data from the provided API, we need the Web app to:
+* Display a list of 10 beers with their {
+name:
+date:
+image:
+description:
+}
+* Implement a delete button to delete the beer on your list
+* BONUS Add a search bar to search for a beer based on it's title -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+
+        <h3>
+
+        </h3>
+
+        <script>
+            async function api() {
+                const beer = await fetch('https://api.punkapi.com/v2/beers');
+                const json = await beer.json()
+
+
+                const beerSlice = json.slice(1, 11);
+                console.log(beerSlice)
+
+                beerSlice.forEach(element => {
+                    const h3 = document.createElement('h3');
+                    const body = document.querySelector('body');
+                    const name = document.createElement('p');
+                    const description = document.createElement('p');
+                    const date = document.createElement('p');
+                    const image = document.createElement('img');
+                    const deleteEl = document.createElement('button');
+                    deleteEl.textContent = 'Delete';
+
+                    body.append(h3);
+                    body.append(name);
+                    body.append(date);
+                    body.append(description);
+                    body.append(image);
+                    body.append(deleteEl)
+
+
+                    h3.textContent = element.id;                    
+                    name.textContent = element.name;                                       
+                    date.textContent = element.first_brewed;
+                    description.textContent = element.description;
+                    image.setAttribute('src', element.image_url);
+                    image.setAttribute('width', '100px');
+
+                    deleteEl.addEventListener('click', () => {
+                        beerSlice.splice(element.id, 1);
+                        console.log(beerSlice)
+                    })
+
+                });
+            }
+
+            api()
+        </script>
+    </body>
+
+</html>
